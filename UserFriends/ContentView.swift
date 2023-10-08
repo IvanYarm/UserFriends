@@ -9,15 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var allUsers: FetchedResults<CashedUser>
     
+  
     @State var users: [User]?
     @State var showAlert = false
     @State var alertMessege: String = ""
+    @State var showView = false
+    
         var body: some View {
         
         NavigationView {
             Group {
-                if let unwreppedUsers = users {
+                if allUsers.count != 0 {
+                    CasedView(users: allUsers)
+                }
+                else if let unwreppedUsers = users {
                     Listview(users: unwreppedUsers)
                 } else {
                     Text("Loading...")
@@ -27,6 +34,20 @@ struct ContentView: View {
             
             
             .navigationTitle("Users Info")
+            .toolbar(content: {
+                Button("Add to Cash") {
+                    Task {
+                        if let unwrepped = self.users {
+                            
+                            await addToCash(decodedUser: unwrepped)
+                           
+                          
+                        }
+                        
+                    }
+                }
+            })
+            
             .alert("Sorry!", isPresented: $showAlert, actions: {
                 Button("Cencel", role: .cancel) {
                     //
@@ -75,6 +96,7 @@ struct ContentView: View {
         }
         
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -110,12 +132,40 @@ extension ContentView {
             //Need stratagy to canvert registered data to standart
             decoder.dateDecodingStrategy = .iso8601
             let decodedUser = try decoder.decode([User].self, from: data)
-            
             return decodedUser
         } catch {
             print(error.localizedDescription)
             throw UserInternetError.invalidData
             
+        }
+    }
+    func addToCash(decodedUser: [User]) async {
+        
+        for user in decodedUser {
+            for friend in user.friends {
+                let cashedFriends = CashedFriend(context: moc)
+                cashedFriends.id = friend.id
+                cashedFriends.name = friend.name
+                cashedFriends.originUser = CashedUser(context: moc)
+                cashedFriends.originUser?.id = user.id
+                cashedFriends.originUser?.name = user.name
+                cashedFriends.originUser?.isActive = user.isActive
+                cashedFriends.originUser?.registered = user.registered
+                
+//                if moc.hasChanges {
+//                    try? moc.save()
+//                    
+//                    
+//                }
+                
+                
+            }
+        }
+        if moc.hasChanges {
+            try? moc.save()
+            print("saving")
+        } else {
+            print("Not saving")
         }
     }
 }

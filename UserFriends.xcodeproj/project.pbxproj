@@ -16,6 +16,13 @@
 		0476A98D2A929E2A00B5E702 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476A98C2A929E2A00B5E702 /* User.swift */; };
 		0476A9912A92E97600B5E702 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476A9902A92E97600B5E702 /* FriendsView.swift */; };
 		0476A9932A92F57800B5E702 /* UserInternetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476A9922A92F57800B5E702 /* UserInternetError.swift */; };
+		04977ACC2AC8D6AA000F7D4C /* UserandFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04977ACA2AC8D6AA000F7D4C /* UserandFriends.xcdatamodeld */; };
+		04977AD12AC8DAB9000F7D4C /* CashedFriend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04977ACD2AC8DAB9000F7D4C /* CashedFriend+CoreDataClass.swift */; };
+		04977AD22AC8DAB9000F7D4C /* CashedFriend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04977ACE2AC8DAB9000F7D4C /* CashedFriend+CoreDataProperties.swift */; };
+		04977AD32AC8DAB9000F7D4C /* CashedUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04977ACF2AC8DAB9000F7D4C /* CashedUser+CoreDataClass.swift */; };
+		04977AD42AC8DAB9000F7D4C /* CashedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04977AD02AC8DAB9000F7D4C /* CashedUser+CoreDataProperties.swift */; };
+		04977AD62ACE83B3000F7D4C /* CasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04977AD52ACE83B3000F7D4C /* CasedView.swift */; };
+		04977AD82ACE8BAA000F7D4C /* CashedFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04977AD72ACE8BAA000F7D4C /* CashedFriendsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +36,13 @@
 		0476A98C2A929E2A00B5E702 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0476A9902A92E97600B5E702 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		0476A9922A92F57800B5E702 /* UserInternetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInternetError.swift; sourceTree = "<group>"; };
+		04977ACB2AC8D6AA000F7D4C /* UserAndFriends.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserAndFriends.xcdatamodel; sourceTree = "<group>"; };
+		04977ACD2AC8DAB9000F7D4C /* CashedFriend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashedFriend+CoreDataClass.swift"; sourceTree = "<group>"; };
+		04977ACE2AC8DAB9000F7D4C /* CashedFriend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashedFriend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		04977ACF2AC8DAB9000F7D4C /* CashedUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashedUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		04977AD02AC8DAB9000F7D4C /* CashedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		04977AD52ACE83B3000F7D4C /* CasedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasedView.swift; sourceTree = "<group>"; };
+		04977AD72ACE8BAA000F7D4C /* CashedFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashedFriendsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +59,10 @@
 		0476A9722A929DE100B5E702 = {
 			isa = PBXGroup;
 			children = (
+				04977ACD2AC8DAB9000F7D4C /* CashedFriend+CoreDataClass.swift */,
+				04977ACE2AC8DAB9000F7D4C /* CashedFriend+CoreDataProperties.swift */,
+				04977ACF2AC8DAB9000F7D4C /* CashedUser+CoreDataClass.swift */,
+				04977AD02AC8DAB9000F7D4C /* CashedUser+CoreDataProperties.swift */,
 				0476A97D2A929DE100B5E702 /* UserFriends */,
 				0476A97C2A929DE100B5E702 /* Products */,
 			);
@@ -65,7 +83,10 @@
 				0476A9802A929DE100B5E702 /* ContentView.swift */,
 				04748A552A985AB200363F1B /* Listview.swift */,
 				0476A9902A92E97600B5E702 /* FriendsView.swift */,
+				04977AD52ACE83B3000F7D4C /* CasedView.swift */,
+				04977AD72ACE8BAA000F7D4C /* CashedFriendsView.swift */,
 				0476A98C2A929E2A00B5E702 /* User.swift */,
+				04977ACA2AC8D6AA000F7D4C /* UserandFriends.xcdatamodeld */,
 				0444AC7A2AC27B7400F04ED6 /* DataController.swift */,
 				0476A9922A92F57800B5E702 /* UserInternetError.swift */,
 				0476A9822A929DE500B5E702 /* Assets.xcassets */,
@@ -152,13 +173,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04977ACC2AC8D6AA000F7D4C /* UserandFriends.xcdatamodeld in Sources */,
 				0476A9812A929DE100B5E702 /* ContentView.swift in Sources */,
 				0476A97F2A929DE100B5E702 /* UserFriendsApp.swift in Sources */,
 				0476A9932A92F57800B5E702 /* UserInternetError.swift in Sources */,
+				04977AD82ACE8BAA000F7D4C /* CashedFriendsView.swift in Sources */,
 				0476A9912A92E97600B5E702 /* FriendsView.swift in Sources */,
 				0444AC7B2AC27B7400F04ED6 /* DataController.swift in Sources */,
+				04977AD12AC8DAB9000F7D4C /* CashedFriend+CoreDataClass.swift in Sources */,
 				04748A562A985AB200363F1B /* Listview.swift in Sources */,
+				04977AD42AC8DAB9000F7D4C /* CashedUser+CoreDataProperties.swift in Sources */,
 				0476A98D2A929E2A00B5E702 /* User.swift in Sources */,
+				04977AD22AC8DAB9000F7D4C /* CashedFriend+CoreDataProperties.swift in Sources */,
+				04977AD62ACE83B3000F7D4C /* CasedView.swift in Sources */,
+				04977AD32AC8DAB9000F7D4C /* CashedUser+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +389,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		04977ACA2AC8D6AA000F7D4C /* UserandFriends.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				04977ACB2AC8D6AA000F7D4C /* UserAndFriends.xcdatamodel */,
+			);
+			currentVersion = 04977ACB2AC8D6AA000F7D4C /* UserAndFriends.xcdatamodel */;
+			path = UserandFriends.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0476A9732A929DE100B5E702 /* Project object */;
 }

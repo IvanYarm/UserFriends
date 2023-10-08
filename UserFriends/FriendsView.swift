@@ -22,14 +22,7 @@ struct FriendsView: View {
     }
 }
 
-//struct FriendsView_Previews: PreviewProvider {
-//    static var friends: [Friends] = [Friends(id: "23", name: "Ivan"), Friends(id: "223", name: "Boba")]
-//    static var previews: some View {
-//        
-//        FriendsView(friends: friends)
-//    }
-//}
 
-//#Preview {
-//    FriendsView(friends: [Friends(id: "23", name: "Ivan"), Friends(id: "223", name: "Boba")])
-//}
+#Preview {
+    FriendsView(friends: [Friends(id: "23", name: "Ivan"), Friends(id: "223", name: "Boba")])
+}
