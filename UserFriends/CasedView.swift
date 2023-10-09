@@ -28,6 +28,7 @@ struct CasedView: View {
                 }
                 
             }
+            .navigationTitle("Cashed Veiw")
         }
     }
 }

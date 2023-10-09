@@ -21,53 +21,53 @@ struct ContentView: View {
         
         NavigationView {
             Group {
-                if allUsers.count != 0 {
-                    CasedView(users: allUsers)
-                }
-                else if let unwreppedUsers = users {
+//                if allUsers.count != 0 {
+//                    CasedView(users: allUsers)
+//                }
+                 if let unwreppedUsers = users {
                     Listview(users: unwreppedUsers)
-                } else {
-                    Text("Loading...")
-                }
+                     
+                 } else if showView {
+                    CasedView(users: allUsers)
+                 } else {
+                     Text("Loading")
+                 }
             }
             
             
             
             .navigationTitle("Users Info")
-            .toolbar(content: {
-                Button("Add to Cash") {
-                    Task {
-                        if let unwrepped = self.users {
-                            
-                            await addToCash(decodedUser: unwrepped)
-                           
-                          
-                        }
-                        
-                    }
-                }
-            })
+            
             
             .alert("Sorry!", isPresented: $showAlert, actions: {
-                Button("Cencel", role: .cancel) {
-                    //
+                Button("Cancel", role: .cancel) {
+                //
                 }
                 Button("Try again") {
                     Task {
                         do {
                             users = try await getUsers()
+                            
                         } catch UserInternetError.invalidURL {
-                            alertMessege = "Invalid interner link"
+                            alertMessege = "Invalid interner link, loading from Cash"
+                            showView = true
                             showAlert = true
+                            
                         } catch UserInternetError.invalidData {
-                            alertMessege = "Invalid data"
+                            alertMessege = "Invalid data, Loading from Cash"
+                            showView = true
                             showAlert = true
+                           
                         } catch UserInternetError.ivalidResponse {
-                            alertMessege = "Invalid response"
+                            alertMessege = "Invalid response, Loading from Cash"
+                            showView = true
                             showAlert = true
+                           
                         } catch {
-                           alertMessege = error.localizedDescription
+                           alertMessege = "\(error.localizedDescription), Loading from Cash"
+                            showView = true
                             showAlert = true
+                          
                         }
                     }
                 }
@@ -75,21 +75,27 @@ struct ContentView: View {
                 Text(alertMessege)
             })
             .task {
-                do {
-                    users = try await getUsers()
-                } catch UserInternetError.invalidURL {
-                    alertMessege = "Invalid interner link"
-                    showAlert = true
-                } catch UserInternetError.invalidData {
-                    alertMessege = "Invalid data"
-                    showAlert = true
-                } catch UserInternetError.ivalidResponse {
-                    alertMessege = "Invalid response"
-                    showAlert = true
-                } catch {
-                   alertMessege = error.localizedDescription
-                    showAlert = true
+                  do {
+                      users = try await getUsers()
+                      if let newUsers = users {
+                         await addToCache(decodedUser: newUsers)
+                      }
+                      
+                  } catch UserInternetError.invalidURL {
+                      alertMessege = "Invalid interner link"
+                      showAlert = true
+                  } catch UserInternetError.invalidData {
+                      alertMessege = "Invalid data"
+                      showAlert = true
+                  } catch UserInternetError.ivalidResponse {
+                      alertMessege = "Invalid response"
+                      showAlert = true
+                  } catch {
+                     alertMessege = error.localizedDescription
+                      showAlert = true
+                  
                 }
+                
             }
             
             
@@ -131,7 +137,10 @@ extension ContentView {
             let decoder = JSONDecoder()
             //Need stratagy to canvert registered data to standart
             decoder.dateDecodingStrategy = .iso8601
-            let decodedUser = try decoder.decode([User].self, from: data)
+            let decodedUser: [User] = try await MainActor.run {
+                try decoder.decode([User].self, from: data)
+            }
+           
             return decodedUser
         } catch {
             print(error.localizedDescription)
@@ -139,7 +148,7 @@ extension ContentView {
             
         }
     }
-    func addToCash(decodedUser: [User]) async {
+    func addToCache(decodedUser: [User]) async {
         
         for user in decodedUser {
             for friend in user.friends {
@@ -165,7 +174,7 @@ extension ContentView {
             try? moc.save()
             print("saving")
         } else {
-            print("Not saving")
+            print("Not saved, no changes")
         }
     }
 }
