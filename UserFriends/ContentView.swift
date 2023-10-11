@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: []) var allUsers: FetchedResults<CashedUser>
+    
     
   
     @State var users: [User]?
@@ -21,14 +20,8 @@ struct ContentView: View {
         
         NavigationView {
             Group {
-//                if allUsers.count != 0 {
-//                    CasedView(users: allUsers)
-//                }
                  if let unwreppedUsers = users {
                     Listview(users: unwreppedUsers)
-                     
-                 } else if showView {
-                    CasedView(users: allUsers)
                  } else {
                      Text("Loading")
                  }
@@ -77,9 +70,7 @@ struct ContentView: View {
             .task {
                   do {
                       users = try await getUsers()
-                      if let newUsers = users {
-                         await addToCache(decodedUser: newUsers)
-                      }
+                     
                       
                   } catch UserInternetError.invalidURL {
                       alertMessege = "Invalid interner link"
@@ -146,35 +137,6 @@ extension ContentView {
             print(error.localizedDescription)
             throw UserInternetError.invalidData
             
-        }
-    }
-    func addToCache(decodedUser: [User]) async {
-        
-        for user in decodedUser {
-            for friend in user.friends {
-                let cashedFriends = CashedFriend(context: moc)
-                cashedFriends.id = friend.id
-                cashedFriends.name = friend.name
-                cashedFriends.originUser = CashedUser(context: moc)
-                cashedFriends.originUser?.id = user.id
-                cashedFriends.originUser?.name = user.name
-                cashedFriends.originUser?.isActive = user.isActive
-                cashedFriends.originUser?.registered = user.registered
-                
-//                if moc.hasChanges {
-//                    try? moc.save()
-//                    
-//                    
-//                }
-                
-                
-            }
-        }
-        if moc.hasChanges {
-            try? moc.save()
-            print("saving")
-        } else {
-            print("Not saved, no changes")
         }
     }
 }
